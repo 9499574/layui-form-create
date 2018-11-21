@@ -1,6 +1,7 @@
 html,body{background-color: #f2f2f2}
 .layui-fluid{margin-top: 15px;}
 .content{min-height: 796px;}
+.nav{text-align: center;}
 .nav button{margin-bottom: 3px;width: 80px;}
 .layui-card-body .layui-btn+.layui-btn{margin-left: 0px;}
 .code-show{min-height: 454px;}
