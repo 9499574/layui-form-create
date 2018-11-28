@@ -5,6 +5,7 @@
  */
 layui.define(['layer', 'form'], function(exports){
   var layer = layui.layer,form = layui.form,$ = layui.$,key = '';
+    delHtml()
   $('button').on('click',function(){
   	var _this = $(this),
   		 size = _this.data('size'),
@@ -38,16 +39,43 @@ layui.define(['layer', 'form'], function(exports){
             break;
         case 'del':
             $('form').html("\n")
+            delHtml()
             $('.code-show').text('')
             return false
             break;
         default:
             layer.msg('类型错误',{icon:2})
     }
+
     $('form').append(html);
-  	form.render();
-  	$('.code-show').text($('.code').html())
+    form.render();
+    setHtml(html)
+
+
   })
+
+    function delHtml() {
+        layui.data('form_html', {
+            key: 'html'
+            ,remove: true
+        });
+    }
+
+    function setHtml(html) {
+      var h = layui.data('form_html');
+      if(h && h.html ){
+          var _d = h.html+html
+      }else{
+          var _d = html
+      }
+        layui.data('form_html',{
+            key:'html',
+            value:_d
+        })
+        $('.code-show').text('<form class="layui-form" action="" onsubmit="return false">\n' +_d+ '</form>')
+
+    }
+
     function input(type,size) {
         var name = type==='text'?'输入框':(type==='password'?'密码框':'');
         var html = '  <div class="layui-form-item">\n' +
